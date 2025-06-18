@@ -20,7 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with GATL. If not, see <https://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
 set(VERSION_MAJOR 2)
 set(VERSION_MINOR 2)
@@ -32,13 +32,43 @@ project(GATL
   LANGUAGES CXX
 )
 
-set(CMAKE_CXX_STANDARD 17)
+# Modernize C++ standard
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-file(INSTALL "./include" DESTINATION "${CMAKE_INSTALL_PREFIX}" FILES_MATCHING PATTERN "*.hpp")
+# Add the include-only library
+add_library(gatl INTERFACE)
+target_include_directories(gatl INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
 
+# Install headers
+install(DIRECTORY ./include/ DESTINATION include FILES_MATCHING PATTERN "*.hpp")
+
+# Optional: install CMake config files
 configure_file("./cmake/GATLConfig.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/GATLConfig.cmake" @ONLY NEWLINE_STYLE UNIX)
-file(INSTALL "${CMAKE_CURRENT_BINARY_DIR}/GATLConfig.cmake" DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/gatl")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/GATLConfig.cmake" DESTINATION lib/gatl)
 
 configure_file("./cmake/GATLConfigVersion.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/GATLConfigVersion.cmake" @ONLY NEWLINE_STYLE UNIX)
-file(INSTALL "${CMAKE_CURRENT_BINARY_DIR}/GATLConfigVersion.cmake" DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/gatl")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/GATLConfigVersion.cmake" DESTINATION lib/gatl)
+
+# ------------------------
+# Test setup (doctest)
+# ------------------------
+enable_testing()
+
+add_executable(gatl_tests
+  tools/test/main.cpp
+)
+
+target_include_directories(gatl_tests PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/test/external
+)
+
+target_link_libraries(gatl_tests PRIVATE gatl)
+
+add_test(NAME gatl_tests COMMAND gatl_tests)
+

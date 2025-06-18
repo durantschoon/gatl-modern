@@ -1,3 +1,10 @@
+
+# Branch info: feature/modernize-cpp23
+
+⚙️ Modernization in Progress: This fork of GATL is being actively updated to C++23, with a focus on test-driven development using doctest. We're modernizing the codebase to take advantage of new language features while preserving compatibility with the original API. Future phases might explore C++26 enhancements.
+
+⚙️ Additionally: This fork will experiment with a rust versions, using shared tests.
+
 # GATL: Geometric Algebra Template Library
 
 GATL is a C++ library for Euclidean, homogeneous/projective, Mikowski/spacetime, conformal, and arbitrary [geometric algebras](https://en.wikipedia.org/wiki/Geometric_algebra).
@@ -90,6 +97,36 @@ Recall that `<gatl-dir>` is the directory in which you placed GATL's source code
 
 The executable files produced by the last command start with `gatl_example_`.
 
+### CMake extensions from preset file:
+
+
+On any platform:
+
+```sh
+# Configure and build debug version
+cmake --preset debug
+cmake --build --preset debug
+
+# Configure and build release version
+cmake --preset release
+cmake --build --preset release
+
+# Run tests
+ctest --preset debug  # or release
+```
+
+For debugging memory issues:
+```sh
+cmake --preset asan
+cmake --build --preset asan
+```
+
+For debugging undefined behavior:
+```sh
+cmake --preset ubsan
+cmake --build --preset ubsan
+```
+
 ## 4. Compiling and Running Unit-Tests
 
 Unit-tests are under construction. Please, don't try to build them.
@@ -102,22 +139,32 @@ According to GATL conventions, in the following definitions, `lhs` and `rhs` are
 
 Contents:
 
-- [Namespaces](#namespaces)
-- [Macros](#macros)
-- [Classes and Data Types](#classes-and-data-types)
-- [Utilities Constants and Functions](#utilities-constants-and-functions)
-- [Products and Basic Operations](#products-and-basic-operations)
-- [Overloaded Operators](#overloaded-operators)
-- [Overloaded Mathematical Functions](#overloaded-mathematical-functions)
-- [Tools](#tools)
-- [Algebra-Specific Declarations](#algebra-specific-declarations)
-  - [Signed](#signed)
-  - [Euclidean](#euclidean)
-  - [Homogeneous/Projective](#homogeneousprojective)
-  - [Plane-Based](#plane-based)
-  - [Mikowski/Spacetime](#mikowskispacetime)
-  - [Conformal](#conformal)
-  - [General](#general)
+- [Branch info: feature/modernize-cpp23](#branch-info-featuremodernize-cpp23)
+- [GATL: Geometric Algebra Template Library](#gatl-geometric-algebra-template-library)
+  - [1. Requirements](#1-requirements)
+  - [2. How to "Install" GATL](#2-how-to-install-gatl)
+  - [3. Compiling Examples](#3-compiling-examples)
+    - [CMake extensions from preset file:](#cmake-extensions-from-preset-file)
+  - [4. Compiling and Running Unit-Tests](#4-compiling-and-running-unit-tests)
+  - [5. Documentation](#5-documentation)
+    - [Namespaces](#namespaces)
+    - [Macros](#macros)
+    - [Classes and Data Types](#classes-and-data-types)
+    - [Utilities Constants and Functions](#utilities-constants-and-functions)
+    - [Products and Basic Operations](#products-and-basic-operations)
+    - [Overloaded Operators](#overloaded-operators)
+    - [Overloaded Mathematical Functions](#overloaded-mathematical-functions)
+    - [Tools](#tools)
+    - [Algebra-Specific Declarations](#algebra-specific-declarations)
+      - [Signed](#signed)
+      - [Euclidean](#euclidean)
+      - [Homogeneous/Projective](#homogeneousprojective)
+      - [Plane-Based](#plane-based)
+      - [Mikowski/Spacetime](#mikowskispacetime)
+      - [Conformal](#conformal)
+      - [General](#general)
+  - [6. Related Project](#6-related-project)
+  - [7. License](#7-license)
 
 ### Namespaces
 

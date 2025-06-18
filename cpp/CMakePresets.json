@@ -1,0 +1,100 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "description": "Base configuration shared by all presets",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CXX_STANDARD": "23",
+                "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+                "CMAKE_CXX_EXTENSIONS": "OFF",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_POSITION_INDEPENDENT_CODE": "ON",
+                "GATL_BUILD_TESTS": "ON",
+                "GATL_BUILD_EXAMPLES": "ON",
+                "GATL_BUILD_DOCS": "OFF"
+            }
+        },
+        {
+            "name": "debug",
+            "description": "Debug build with sanitizers",
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -Werror -g -fno-omit-frame-pointer",
+                "CMAKE_CXX_FLAGS_DEBUG": "-O0 -fno-inline",
+                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic -Werror -g -fno-omit-frame-pointer",
+                "CMAKE_C_FLAGS_DEBUG": "-O0 -fno-inline"
+            }
+        },
+        {
+            "name": "release",
+            "description": "Release build with optimizations",
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -DNDEBUG",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O3 -march=native -DNDEBUG",
+                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic -DNDEBUG",
+                "CMAKE_C_FLAGS_RELEASE": "-O3 -march=native -DNDEBUG"
+            }
+        },
+        {
+            "name": "asan",
+            "description": "Debug build with Address Sanitizer",
+            "inherits": "debug",
+            "cacheVariables": {
+                "CMAKE_CXX_FLAGS": "$<SEMICOLON>-fsanitize=address -fno-omit-frame-pointer",
+                "CMAKE_C_FLAGS": "$<SEMICOLON>-fsanitize=address -fno-omit-frame-pointer",
+                "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address",
+                "CMAKE_MODULE_LINKER_FLAGS": "-fsanitize=address"
+            }
+        },
+        {
+            "name": "ubsan",
+            "description": "Debug build with Undefined Behavior Sanitizer",
+            "inherits": "debug",
+            "cacheVariables": {
+                "CMAKE_CXX_FLAGS": "$<SEMICOLON>-fsanitize=undefined -fno-omit-frame-pointer",
+                "CMAKE_C_FLAGS": "$<SEMICOLON>-fsanitize=undefined -fno-omit-frame-pointer",
+                "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=undefined",
+                "CMAKE_MODULE_LINKER_FLAGS": "-fsanitize=undefined"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "description": "Build with debug configuration"
+        },
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "description": "Build with release configuration"
+        },
+        {
+            "name": "asan",
+            "configurePreset": "asan",
+            "description": "Build with address sanitizer"
+        },
+        {
+            "name": "ubsan",
+            "configurePreset": "ubsan",
+            "description": "Build with undefined behavior sanitizer"
+        }
+    ],
+    "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    }
+}

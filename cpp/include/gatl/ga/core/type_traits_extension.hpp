@@ -46,8 +46,10 @@ namespace ga {
 
         // Helper function to convert a tuple into a list-initialization structure.
         template<typename Tuple, std::size_t... Indices>
-        GA_ALWAYS_INLINE constexpr decltype(auto) _to_list_initialization(Tuple &&tuple, std::index_sequence<Indices...>) GA_NOEXCEPT {
-            return { std::get<Indices>(std::move(tuple))... };
+        GA_ALWAYS_INLINE constexpr auto 
+        _to_list_initialization(Tuple &&tuple, std::index_sequence<Indices...>) GA_NOEXCEPT {
+            using value_type = typename std::tuple_element<0, std::remove_reference_t<Tuple>>::type;
+            return std::initializer_list<value_type>{ std::get<Indices>(std::move(tuple))... };
         }
 
         template<typename Tuple>
