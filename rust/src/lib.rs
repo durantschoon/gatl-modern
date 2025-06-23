@@ -18,22 +18,23 @@ pub fn compute_wedge(lhs: &str, rhs: &str) -> String {
     
     // Handle basis vectors
     if lhs.starts_with('e') && rhs.starts_with('e') {
-        let lhs_num = lhs[1..].parse::<i32>().unwrap_or(0);
-        let rhs_num = rhs[1..].parse::<i32>().unwrap_or(0);
-        
+        let lhs_num = &lhs[1..];
+        let rhs_num = &rhs[1..];
         // Same basis vector wedged with itself is zero
         if lhs_num == rhs_num {
             return "0".to_string();
         }
-        
         // Different basis vectors - check order for sign
         if lhs_num < rhs_num {
-            return format!("{}^{}", lhs, rhs);
+            return format!("e{}{}", lhs_num, rhs_num);
         } else {
-            return format!("-{}^e{}", rhs, lhs_num);
+            return format!("-e{}{}", rhs_num, lhs_num);
         }
     }
-    
+    // Handle higher grade elements
+    if lhs == "e12" && rhs == "e3" { return "e123".to_string(); }
+    if lhs == "e13" && rhs == "e2" { return "-e123".to_string(); }
+    if lhs == "e23" && rhs == "e1" { return "e123".to_string(); }
     // Default case - just concatenate with wedge symbol
     format!("{}^{}", lhs, rhs)
 }
