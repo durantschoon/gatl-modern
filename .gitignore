@@ -1,13 +1,24 @@
-/cpp/build/vc2017/x64
-/cpp/build/vc2017/.vs
-/cpp/build/vc2017/gatl/.vs
-/cpp/build/vc2017/test
-/cpp/build/vc2017/example
-/cpp/tools/example/build
-/cpp/tools/test/build
-/.vscode
-/cpp/tools/example/.vscode
-/cpp/build
-/cpp/.vscode
-/build
-/cpp/tools/test/.vscode
+# Top-level build artifacts
+/build/
+cpp/build/
+cpp/tools/**/build/
+cpp/build/**
+
+# IDE/editor folders
+.vscode/
+cpp/.vscode/
+cpp/tools/**/.vscode/
+
+# Visual Studio (.vs folders)
+**/.vs/
+
+# Editor & Spacemacs cache
+cpp/.cache/
+
+# CMake-generated files
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+
+# Test binaries
+gatl_tests
