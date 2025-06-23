@@ -22,3 +22,22 @@ cpp/.cache/
 
 # Test binaries
 gatl_tests
+wedge_product_test
+
+# Rust build artifacts
+rust/target/
+rust/Cargo.lock
+
+# scripts related
+.venv/
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Temporary CMake files
+CMakeLists.txt.bak

@@ -1,0 +1,20 @@
+[
+    {
+        "lhs": "e1",
+        "rhs": "e2",
+        "expected": "e12",
+        "description": "e1 * e2 = e12"
+    },
+    {
+        "lhs": "e1",
+        "rhs": "e1",
+        "expected": "0",
+        "description": "e1 * e1 = 0"
+    },
+    {
+        "lhs": "e12",
+        "rhs": "e3",
+        "expected": "e123",
+        "description": "e12 * e3 = e123"
+    }
+]

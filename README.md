@@ -1,9 +1,31 @@
 
 # Branch info: feature/modernize-cpp23
 
-⚙️ Modernization in Progress: This fork of GATL is being actively updated to C++23, with a focus on test-driven development using doctest. We're modernizing the codebase to take advantage of new language features while preserving compatibility with the original API. Future phases might explore C++26 enhancements.
+⚙️ **Modernization in Progress**: This fork of GATL is being actively updated to C++23, with a focus on test-driven development using doctest. We're modernizing the codebase to take advantage of new language features while preserving compatibility with the original API. Future phases might explore C++26 enhancements.
 
-⚙️ Additionally: This fork will experiment with a rust versions, using shared tests.
+⚙️ **Multi-Language Goals**: This fork will experiment with Rust implementations, using shared tests to ensure consistency across language versions.
+
+## 🚀 Development Goals
+
+- **C++23 Modernization**: Update codebase to leverage C++23 features while maintaining API compatibility
+- **Test-Driven Development**: Implement comprehensive test suite using doctest framework
+- **Rust Implementation**: Create parallel Rust version with shared test specifications
+- **Performance Optimization**: Leverage compile-time optimizations and modern language features
+- **Documentation**: Maintain comprehensive documentation for both C++ and Rust versions
+
+## 🧪 Testing Infrastructure
+
+The project includes a comprehensive testing framework with multiple test runners:
+
+### Test Scripts (./scripts/)
+
+- **`test.sh`** - Master test runner with interactive menu
+- **`test_basic.sh`** - Basic C++23 tests (string-based placeholder, always works)
+- **`test_cpp23.sh`** - Advanced C++23 tests (attempts real GATL operations)
+- **`run_all_tests.sh`** - Comprehensive test runner for all language versions
+- **`run_original_tests.sh`** - Original C++17 codebase tests
+
+### Quick Start Testing
 
 # GATL: Geometric Algebra Template Library
 
@@ -140,6 +162,10 @@ According to GATL conventions, in the following definitions, `lhs` and `rhs` are
 Contents:
 
 - [Branch info: feature/modernize-cpp23](#branch-info-featuremodernize-cpp23)
+  - [🚀 Development Goals](#-development-goals)
+  - [🧪 Testing Infrastructure](#-testing-infrastructure)
+    - [Test Scripts (./scripts/)](#test-scripts-scripts)
+    - [Quick Start Testing](#quick-start-testing)
 - [GATL: Geometric Algebra Template Library](#gatl-geometric-algebra-template-library)
   - [1. Requirements](#1-requirements)
   - [2. How to "Install" GATL](#2-how-to-install-gatl)

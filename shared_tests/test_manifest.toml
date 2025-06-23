@@ -1,0 +1,5 @@
+[[tests]]
+name = "wedge_product"
+file = "wedge_product.json"
+description = "Binary wedge product of basis blades"
+tags = ["wedge", "binary", "blades"]

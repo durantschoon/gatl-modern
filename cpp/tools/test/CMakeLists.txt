@@ -20,13 +20,16 @@
 # You should have received a copy of the GNU General Public License
 # along with GATL. If not, see <https://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.21)
 
 project(GATL-Test)
 
 enable_testing()
 
 find_package(GATL REQUIRED)
+
+# Find nlohmann/json
+find_package(nlohmann_json 3.11.2 REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -74,3 +77,20 @@ foreach(test_group ${test_groups})
     add_test(${target_prefix}${test_group}_${test_name} ${target_prefix}${test_group}_${test_name})
   endforeach()
 endforeach()
+
+# Add test executable
+add_executable(wedge_product_tests wedge_product_tests.cpp)
+
+# Link nlohmann/json
+target_link_libraries(wedge_product_tests PRIVATE nlohmann_json::nlohmann_json)
+
+# Include directories
+target_include_directories(wedge_product_tests PRIVATE 
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/tools/test
+)
+
+# Add to CTest
+add_test(NAME WedgeProductTests COMMAND wedge_product_tests)
+
+add_subdirectory(tools/test)
