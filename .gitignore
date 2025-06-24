@@ -1,3 +1,11 @@
+# C++23 build artifacts
+cpp23/build/
+cpp23/build/**
+cpp23/.vscode/
+
+# Optionally ignore all bin/ folders
+**/bin/
+
 # Top-level build artifacts
 /build/
 cpp/build/
