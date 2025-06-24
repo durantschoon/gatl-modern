@@ -1,6 +1,16 @@
-.PHONY: cpp23 cpp23-test cpp23-clean
+.PHONY: cpp23 cpp23-test cpp23-clean help
 
 # Makefile for GATL
+
+help:
+	@echo "Available targets:"
+	@echo "  all          - Build original C++ code (cpp/)"
+	@echo "  test         - Run tests for original C++ code"
+	@echo "  clean        - Clean original build"
+	@echo "  cpp23        - Build C++23 modernized code (cpp23/)"
+	@echo "  cpp23-test   - Run tests for C++23 code"
+	@echo "  cpp23-clean  - Clean C++23 build"
+	@echo "  help         - Show this help message"
 
 # Default: build original C++ code (cpp/)
 all:
