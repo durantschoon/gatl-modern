@@ -1,3 +1,31 @@
+/*
+ * GATL: Geometric Algebra Template Library
+ * 
+ * Copyright (c) 2021 Leandro A. F. Fernandes
+ * Copyright (c) 2024 Durant Schoon (C++23 modernization)
+ * 
+ * This file is part of the Rust implementation of GATL.
+ * 
+ * GATL is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * GATL is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with GATL.  If not, see <https://www.gnu.org/licenses/>.
+ * 
+ * Original repository: https://github.com/laffernandes/gatl
+ * Modernized fork: https://github.com/durantschoon/gatl
+ * 
+ * This Rust implementation provides a memory-safe alternative to the C++ version
+ * with shared test specifications to ensure cross-language consistency.
+ */
+
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }

@@ -1,7 +1,13 @@
 [package]
-name = "rust"
+name = "gatl-rust"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+description = "Rust implementation of GATL (Geometric Algebra Template Library)"
+authors = ["Leandro A. F. Fernandes <laffernandes@ic.uff.br>", "Durant Schoon <durant.schoon@gmail.com>"]
+license = "GPL-3.0"
+repository = "https://github.com/durantschoon/gatl"
+keywords = ["geometric-algebra", "clifford-algebra", "mathematics", "physics"]
+categories = ["science", "mathematics"]
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }

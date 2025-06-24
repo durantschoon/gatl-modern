@@ -27,10 +27,15 @@ The project includes a comprehensive testing framework with multiple test runner
 
 ### Quick Start Testing
 
-**C++ Tests:**
+**C++23 Tests:**
 ```bash
-./scripts/test_basic.sh    # Always works, string-based
-./scripts/test_cpp23.sh    # Attempts real GATL (may fail during modernization)
+make cpp23-test    # Run C++23 foundation tests
+./scripts/test.sh  # Interactive menu for all test types
+```
+
+**Original C++17 Tests:**
+```bash
+make test          # Run original C++17 tests
 ```
 
 **Rust Tests:**
@@ -41,6 +46,35 @@ cd rust && cargo test       # All tests pass, including shared JSON tests
 **Cross-Language Tests:**
 ```bash
 ./scripts/test.sh          # Interactive menu for all test types
+```
+
+## 🛠️ Build and Installation
+
+### Quick Start (C++23 - Recommended)
+```bash
+git clone https://github.com/durantschoon/gatl.git
+cd gatl
+make cpp23
+make cpp23-test
+```
+
+### Original C++17 Version
+```bash
+git clone https://github.com/durantschoon/gatl.git
+cd gatl
+make
+make test
+```
+
+### All Available Make Targets
+```bash
+make help          # Show all available targets
+make cpp23         # Build C++23 modernized code
+make cpp23-test    # Run C++23 tests
+make cpp23-clean   # Clean C++23 build
+make               # Build original C++17 code
+make test          # Run original C++17 tests
+make clean         # Clean original build
 ```
 
 # GATL: Geometric Algebra Template Library
@@ -77,7 +111,7 @@ Let me know if you want to contribute to this project. [Here](http://www.ic.uff.
 **Contents:**
 
 1. [Requirements](#1-requirements)
-2. [How to "Install" GATL](#2-how-to-install-gatl)
+2. [How to Build and Install](#2-how-to-build-and-install)
 3. [Compiling Examples](#3-compiling-examples)
 4. [Compiling and Running Unit-Tests](#4-compiling-and-running-unit-tests)
 5. [Documentation](#5-documentation)
@@ -88,55 +122,76 @@ Let me know if you want to contribute to this project. [Here](http://www.ic.uff.
 
 Make sure that you have the following tools before attempting to use GATL.
 
-Required tool:
+**Required tools:**
+- **C++23 compiler** (GCC 13+, Clang 17+, or MSVC 2022 17.8+)
+- **CMake 3.20+** (recommended for building and testing)
 
-- Your favorite [C++17](https://en.wikipedia.org/wiki/C%2B%2B17) compiler.
-
-Optional tool:
-
-- [CMake](https://cmake.org) to automate installation and to build and run examples and unit-tests.
+**Optional tools:**
+- **Rust toolchain** (for Rust implementation and cross-language testing)
 
 GATL doesn't have any dependencies other than the [C++ standard library](https://en.cppreference.com/w/cpp/header).
 
-## 2. How to "Install" GATL
+## 2. How to Build and Install
 
-GATL is a pure template library defined in the headers. Therefore, if you want to use GATL, you can use the header files right away. There is no binary library to link to and no configured header file.
-
-Use the [git clone](https://git-scm.com/docs/git-clone) command to download the project, where `<gatl-dir>` must be replaced by the directory in which you want to place GATL's source code, or removed `<gatl-dir>` from the command line to download the project to the `./gatl` directory:
-
+### C++23 Modernized Version (Recommended)
 ```bash
-git clone https://github.com/laffernandes/gatl.git <gatl-dir>
+git clone https://github.com/durantschoon/gatl.git
+cd gatl
+make cpp23
+make cpp23-test
 ```
 
-The directory `<gatl-dir>/cpp/include` must be in the include path of your program, *i.e.*, you have to use the `-I<gatl-dir>/cpp/include` option flag while compiling your program. Alternatively, you can use CMake to copy GATL's header files to the common include directory in your system (*e.g.*, `/usr/local/include`, in Linux) to avoid the use of the `-I<gatl-dir>/cpp/include` option flag. The basic steps for installing GATL using CMake look like this:
+The `cpp23/include` directory contains the modernized C++23 headers with:
+- Modern C++23 features (concepts, constexpr, etc.)
+- Tau-based mathematical constants (τ = 2π)
+- Enhanced type safety with concepts
+- Improved error handling and exception safety
+- Better performance with modern standard library usage
 
+### Original C++17 Version
 ```bash
-cd <gatl-dir>/cpp
-mkdir build
-cd build
-cmake ..
+git clone https://github.com/durantschoon/gatl.git
+cd gatl
+make
+make test
 ```
 
-If you are using CMake to handle builds of your program, then it is strongly recommended to use the commands above to install GATL. After installation CMake will find GATL using the command `find_package(GATL)` (see [CMake documentation](https://cmake.org/cmake/help/latest/command/find_package.html) for details). In addition, you will be able to use the `GATL_INCLUDE_DIRS` variable in the `CMakeList.txt` file of your program while defining the include directories of your project or targets.
+The directory `cpp/include` contains the original C++17 headers.
+
+### All Available Make Targets
+```bash
+make help          # Show all available targets
+make cpp23         # Build C++23 modernized code
+make cpp23-test    # Run C++23 tests
+make cpp23-clean   # Clean C++23 build
+make               # Build original C++17 code
+make test          # Run original C++17 tests
+make clean         # Clean original build
+```
 
 ## 3. Compiling Examples
 
-The basic steps for configuring and building GATL examples look like this:
-
+### C++23 Examples
 ```bash
-cd <gatl-dir>/cpp/tools/example
+cd cpp23/tools/example
 mkdir build
 cd build
 cmake ..
 cmake --build . --config Release
 ```
 
-Recall that `<gatl-dir>` is the directory in which you placed GATL's source code.
+### Original C++17 Examples
+```bash
+cd cpp/tools/example
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
+```
 
 The executable files produced by the last command start with `gatl_example_`.
 
 ### CMake extensions from preset file:
-
 
 On any platform:
 
@@ -167,7 +222,26 @@ cmake --build --preset ubsan
 
 ## 4. Compiling and Running Unit-Tests
 
-Unit-tests are under construction. Please, don't try to build them.
+### C++23 Tests (Working)
+```bash
+make cpp23-test    # Run C++23 foundation tests
+./scripts/test.sh  # Interactive test menu
+```
+
+### Original C++17 Tests
+```bash
+make test          # Run original C++17 tests
+```
+
+### Rust Tests
+```bash
+cd rust && cargo test
+```
+
+### Cross-Language Tests
+```bash
+./scripts/test.sh  # Interactive menu for all test types
+```
 
 ## 5. Documentation
 
@@ -182,12 +256,25 @@ Contents:
   - [🧪 Testing Infrastructure](#-testing-infrastructure)
     - [Test Scripts (./scripts/)](#test-scripts-scripts)
     - [Quick Start Testing](#quick-start-testing)
+  - [🛠️ Build and Installation](#️-build-and-installation)
+    - [Quick Start (C++23 - Recommended)](#quick-start-c23---recommended)
+    - [Original C++17 Version](#original-c17-version)
+    - [All Available Make Targets](#all-available-make-targets)
 - [GATL: Geometric Algebra Template Library](#gatl-geometric-algebra-template-library)
   - [1. Requirements](#1-requirements)
-  - [2. How to "Install" GATL](#2-how-to-install-gatl)
+  - [2. How to Build and Install](#2-how-to-build-and-install)
+    - [C++23 Modernized Version (Recommended)](#c23-modernized-version-recommended)
+    - [Original C++17 Version](#original-c17-version-1)
+    - [All Available Make Targets](#all-available-make-targets-1)
   - [3. Compiling Examples](#3-compiling-examples)
+    - [C++23 Examples](#c23-examples)
+    - [Original C++17 Examples](#original-c17-examples)
     - [CMake extensions from preset file:](#cmake-extensions-from-preset-file)
   - [4. Compiling and Running Unit-Tests](#4-compiling-and-running-unit-tests)
+    - [C++23 Tests (Working)](#c23-tests-working)
+    - [Original C++17 Tests](#original-c17-tests)
+    - [Rust Tests](#rust-tests)
+    - [Cross-Language Tests](#cross-language-tests)
   - [5. Documentation](#5-documentation)
     - [Namespaces](#namespaces)
     - [Macros](#macros)
