@@ -3,7 +3,7 @@
  * author     : Fernandes, Leandro A. F.
  * e-mail     : laffernandes@ic.uff.br
  * home page  : http://www.ic.uff.br/~laffernandes
- * repository : https://github.com/laffernandes/gatl.git
+ * repository : https://github.com/durantschoon/gatl.git
  * 
  * This file is part of The Geometric Algebra Template Library (GATL).
  * 
@@ -19,6 +19,9 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with GATL. If not, see <https://www.gnu.org/licenses/>.
+ * 
+ * C++23 modernization by: durantschoon
+ * Date: 2024-06-24
  */
 
 #ifndef __GA_CORE_DEFAULT_TOLERANCE_HPP__
