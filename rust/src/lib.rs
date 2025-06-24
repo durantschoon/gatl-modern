@@ -10,12 +10,12 @@ pub fn compute_wedge(lhs: &str, rhs: &str) -> String {
     if rhs == "1" {
         return lhs.to_string();
     }
-    
+
     // Handle zero case
     if lhs == "0" || rhs == "0" {
         return "0".to_string();
     }
-    
+
     // Handle basis vectors
     if lhs.starts_with('e') && rhs.starts_with('e') {
         let lhs_num = &lhs[1..];
@@ -32,9 +32,15 @@ pub fn compute_wedge(lhs: &str, rhs: &str) -> String {
         }
     }
     // Handle higher grade elements
-    if lhs == "e12" && rhs == "e3" { return "e123".to_string(); }
-    if lhs == "e13" && rhs == "e2" { return "-e123".to_string(); }
-    if lhs == "e23" && rhs == "e1" { return "e123".to_string(); }
+    if lhs == "e12" && rhs == "e3" {
+        return "e123".to_string();
+    }
+    if lhs == "e13" && rhs == "e2" {
+        return "-e123".to_string();
+    }
+    if lhs == "e23" && rhs == "e1" {
+        return "e123".to_string();
+    }
     // Default case - just concatenate with wedge symbol
     format!("{}^{}", lhs, rhs)
 }
@@ -49,4 +55,3 @@ mod tests {
         assert_eq!(result, 4);
     }
 }
-
