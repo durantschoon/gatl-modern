@@ -28,7 +28,7 @@
 
 use serde::Deserialize;
 use std::fs;
-use rust::compute_wedge;
+use gatl_rust::compute_wedge;
 
 #[derive(Deserialize)]
 struct WedgeTest {

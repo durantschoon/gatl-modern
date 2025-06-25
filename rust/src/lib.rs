@@ -26,6 +26,19 @@
  * with shared test specifications to ensure cross-language consistency.
  */
 
+// Core modules
+pub mod core;
+pub mod exceptions;
+pub mod constants;
+pub mod types;
+
+// Re-export main types and functions for convenience
+pub use core::*;
+pub use exceptions::*;
+pub use constants::*;
+pub use types::*;
+
+// Legacy function for backward compatibility with existing tests
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }
@@ -81,5 +94,19 @@ mod tests {
     fn it_works() {
         let result = add(2, 2);
         assert_eq!(result, 4);
+    }
+
+    #[test]
+    fn test_constants() {
+        // Test tau-based constants
+        assert!((constants::tau::<f64>() - 6.283185307179586).abs() < 1e-15);
+        assert!((constants::pi::<f64>() - 3.141592653589793).abs() < 1e-15);
+    }
+
+    #[test]
+    fn test_angle_conversions() {
+        // Test angle conversions
+        assert!((core::degrees_to_radians(180.0) - constants::pi::<f64>()).abs() < 1e-15);
+        assert!((core::radians_to_degrees(constants::pi::<f64>()) - 180.0).abs() < 1e-15);
     }
 }
