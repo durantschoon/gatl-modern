@@ -79,6 +79,10 @@ make clean         # Clean original build
 
 # GATL: Geometric Algebra Template Library
 
+## Acknowledgments
+
+Some portions of this repository were generated or refactored with the help of ChatGPT-4 (OpenAI).
+
 GATL is a C++ library for Euclidean, homogeneous/projective, Mikowski/spacetime, conformal, and arbitrary [geometric algebras](https://en.wikipedia.org/wiki/Geometric_algebra).
 
 Geometric algebra is a powerful mathematical system encompassing many mathematical concepts (*e.g.*, [complex numbers](https://en.wikipedia.org/wiki/Complex_number), [quaternions algebra](https://en.wikipedia.org/wiki/Quaternion_algebra), [Grassmann-Cayley algebra](https://en.wikipedia.org/wiki/Grassmann%E2%80%93Cayley_algebra), and [Plücker coordinates](https://en.wikipedia.org/wiki/Pl%C3%BCcker_coordinates)) under the same framework. Geometric algebra is mainly based on the algebraic system called [Clifford algebra](https://en.wikipedia.org/wiki/Clifford_algebra), but with a strong emphasis on geometric interpretation. In geometric algebra, subspaces are treated as primitives for computation. As such, it is an appropriate mathematical tool for modeling and solving geometric problems in physics, chemistry, engineering, and computer science.
@@ -261,6 +265,7 @@ Contents:
     - [Original C++17 Version](#original-c17-version)
     - [All Available Make Targets](#all-available-make-targets)
 - [GATL: Geometric Algebra Template Library](#gatl-geometric-algebra-template-library)
+  - [Acknowledgments](#acknowledgments)
   - [1. Requirements](#1-requirements)
   - [2. How to Build and Install](#2-how-to-build-and-install)
     - [C++23 Modernized Version (Recommended)](#c23-modernized-version-recommended)
