@@ -1,0 +1,38 @@
+Checks: >
+  bugprone-*
+  ,cppcoreguidelines-*
+  ,modernize-*
+  ,performance-*
+  ,readability-*
+  ,clang-analyzer-*
+  ,-modernize-use-trailing-return-type
+  ,-cppcoreguidelines-avoid-magic-numbers
+  ,-modernize-use-auto
+  ,-readability-magic-numbers
+
+WarningsAsErrors: ''
+HeaderFilterRegex: '.*'
+FormatStyle: file
+CheckOptions:
+  - key: cppcoreguidelines-special-member-functions.AllowMissingVirtualDestructor
+    value: 'false'
+  - key: modernize-use-nullptr.NullMacros
+    value: 'NULL'
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.ParameterCase
+    value: camelBack
+  - key: readability-identifier-naming.ConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE
+  - key: cppcoreguidelines-avoid-non-const-global-variables.AllowedNames
+    value: 'GA_.*'
+  - key: readability-magic-numbers.IgnoredValues
+    value: '0,1,2,3,4,5,6,7,8,9,10,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536'
+  - key: readability-magic-numbers.IgnoredFloatingPointValues
+    value: '0.0,0.5,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,360.0,180.0,90.0,60.0,30.0'
