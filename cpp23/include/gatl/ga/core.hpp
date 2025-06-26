@@ -227,7 +227,6 @@ namespace ga {
 #include "core/type_traits_extension.hpp"
 #include "core/constexpr.hpp"
 #include "core/default_tolerance.hpp"
-#include "core/tag_types.hpp"
 
 // Note: Other includes will be added as we convert more files
 // #include "core/expression.hpp"
