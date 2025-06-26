@@ -306,6 +306,87 @@ bool test_geometric_algebra_basics() {
     return true;
 }
 
+bool test_operator_symbols() {
+    // Test operator symbol constants
+    static_assert(ga::operators::symbols::geometric_product == '*');
+    static_assert(ga::operators::symbols::outer_product == '^');
+    static_assert(ga::operators::symbols::inner_product == '|');
+    static_assert(ga::operators::symbols::left_contraction == '<');
+    static_assert(ga::operators::symbols::right_contraction == '>');
+    static_assert(ga::operators::symbols::reversion == '~');
+    
+    // Test operator precedence
+    static_assert(ga::operators::precedence::reversion == 15);
+    static_assert(ga::operators::precedence::geometric_product == 13);
+    static_assert(ga::operators::precedence::outer_product == 13);
+    static_assert(ga::operators::precedence::inner_product == 13);
+    static_assert(ga::operators::precedence::addition == 12);
+    
+    // Test operator properties
+    static_assert(!ga::operators::properties::commutative_geometric_product);
+    static_assert(!ga::operators::properties::commutative_outer_product);
+    static_assert(!ga::operators::properties::commutative_inner_product);
+    static_assert(ga::operators::properties::commutative_addition);
+    static_assert(ga::operators::properties::associative_geometric_product);
+    static_assert(ga::operators::properties::associative_outer_product);
+    static_assert(ga::operators::properties::associative_addition);
+    
+    // Test operator names
+    static_assert(ga::operators::names::geometric_product == "geometric product");
+    static_assert(ga::operators::names::outer_product == "outer product");
+    static_assert(ga::operators::names::inner_product == "inner product");
+    static_assert(ga::operators::names::reversion == "reversion");
+    
+    // Test library conventions
+    static_assert(ga::operators::library_conventions::gatl::geometric_product == '*');
+    static_assert(ga::operators::library_conventions::gatl::outer_product == '^');
+    static_assert(ga::operators::library_conventions::python_clifford::geometric_product == '*');
+    static_assert(ga::operators::library_conventions::python_clifford::outer_product == '^');
+    
+    // Test operator utility functions
+    static_assert(ga::operator_utils::get_operator_name<'*'>() == "geometric product");
+    static_assert(ga::operator_utils::get_operator_name<'^'>() == "outer product");
+    static_assert(ga::operator_utils::get_operator_name<'|'>() == "inner product");
+    static_assert(ga::operator_utils::get_operator_name<'~'>() == "reversion");
+    
+    static_assert(!ga::operator_utils::is_commutative<'*'>());
+    static_assert(!ga::operator_utils::is_commutative<'^'>());
+    static_assert(!ga::operator_utils::is_commutative<'|'>());
+    static_assert(ga::operator_utils::is_commutative<'+'>());
+    
+    static_assert(ga::operator_utils::is_associative<'*'>());
+    static_assert(ga::operator_utils::is_associative<'^'>());
+    static_assert(!ga::operator_utils::is_associative<'|'>());
+    static_assert(ga::operator_utils::is_associative<'+'>());
+    
+    static_assert(ga::operator_utils::get_precedence<'~'>() == 15);
+    static_assert(ga::operator_utils::get_precedence<'*'>() == 13);
+    static_assert(ga::operator_utils::get_precedence<'^'>() == 13);
+    static_assert(ga::operator_utils::get_precedence<'|'>() == 13);
+    static_assert(ga::operator_utils::get_precedence<'+'>() == 12);
+    
+    static_assert(ga::operator_utils::get_associativity<'*'>() == ga::operators::associativity::left);
+    static_assert(ga::operator_utils::get_associativity<'^'>() == ga::operators::associativity::left);
+    static_assert(ga::operator_utils::get_associativity<'|'>() == ga::operators::associativity::left);
+    static_assert(ga::operator_utils::get_associativity<'+'>() == ga::operators::associativity::left);
+    
+    // Test operator overload templates
+    using gatl_symbols = ga::operator_overloads::gatl_symbols;
+    using python_symbols = ga::operator_overloads::python_symbols;
+    
+    static_assert(gatl_symbols::geometric_product == '*');
+    static_assert(gatl_symbols::outer_product == '^');
+    static_assert(python_symbols::geometric_product == '*');
+    static_assert(python_symbols::outer_product == '^');
+    
+    // Test default convention
+    using default_symbols = ga::operator_overloads::operator_symbols<>;
+    static_assert(default_symbols::geometric_product == '*');
+    static_assert(default_symbols::outer_product == '^');
+    
+    return true;
+}
+
 int main() {
     std::cout << "Testing GATL C++23 Phase 1 Foundation\n";
     std::cout << "=====================================\n\n";
@@ -321,6 +402,7 @@ int main() {
     all_passed &= test_exceptions();
     all_passed &= test_tag_types();
     all_passed &= test_geometric_algebra_basics();
+    all_passed &= test_operator_symbols();
     
     std::cout << "\n=====================================\n";
     if (all_passed) {
