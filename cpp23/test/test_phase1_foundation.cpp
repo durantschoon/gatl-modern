@@ -198,6 +198,72 @@ bool test_exceptions() {
     return true;
 }
 
+bool test_tag_types() {
+    // Test that tag types are empty and have zero size
+    static_assert(std::is_empty_v<ga::tags::euclidean>);
+    static_assert(std::is_empty_v<ga::tags::conformal>);
+    static_assert(std::is_empty_v<ga::tags::geometric_product>);
+    static_assert(std::is_empty_v<ga::tags::compile_time>);
+    
+    // Test that tag types are classes
+    static_assert(std::is_class_v<ga::tags::euclidean>);
+    static_assert(std::is_class_v<ga::tags::conformal>);
+    static_assert(std::is_class_v<ga::tags::geometric_product>);
+    
+    // Test tag type concepts
+    static_assert(ga::tag_traits::TagType<ga::tags::euclidean>);
+    static_assert(ga::tag_traits::MetricSpaceTag<ga::tags::euclidean>);
+    static_assert(ga::tag_traits::MetricSpaceTag<ga::tags::conformal>);
+    static_assert(ga::tag_traits::ProductOperationTag<ga::tags::geometric_product>);
+    static_assert(ga::tag_traits::ProductOperationTag<ga::tags::outer_product>);
+    static_assert(ga::tag_traits::EvaluationStrategyTag<ga::tags::compile_time>);
+    static_assert(ga::tag_traits::EvaluationStrategyTag<ga::tags::runtime>);
+    
+    // Test tag aliases
+    static_assert(std::is_same_v<ga::tag_aliases::euclidean_2d, ga::tags::euclidean>);
+    static_assert(std::is_same_v<ga::tag_aliases::gp, ga::tags::geometric_product>);
+    static_assert(std::is_same_v<ga::tag_aliases::op, ga::tags::outer_product>);
+    static_assert(std::is_same_v<ga::tag_aliases::compile_time_eval, ga::tags::compile_time>);
+    
+    // Test tag utilities
+    constexpr auto euclidean_name = ga::tag_utils::tag_name<ga::tags::euclidean>();
+    constexpr auto conformal_name = ga::tag_utils::tag_name<ga::tags::conformal>();
+    constexpr auto gp_name = ga::tag_utils::tag_name<ga::tags::geometric_product>();
+    
+    TEST_ASSERT(euclidean_name == "euclidean");
+    TEST_ASSERT(conformal_name == "conformal");
+    TEST_ASSERT(gp_name == "geometric_product");
+    
+    // Test tag compatibility
+    static_assert(ga::tag_utils::are_compatible<ga::tags::euclidean, ga::tags::conformal>());
+    static_assert(ga::tag_utils::are_compatible<ga::tags::geometric_product, ga::tags::outer_product>());
+    
+    // Test combined tags
+    static_assert(std::is_same_v<
+        ga::tag_utils::combined_tag_t<ga::tags::compile_time, ga::tags::runtime>,
+        ga::tags::runtime
+    >);
+    static_assert(std::is_same_v<
+        ga::tag_utils::combined_tag_t<ga::tags::optimized, ga::tags::unoptimized>,
+        ga::tags::unoptimized
+    >);
+    
+    // Test that tags can be used in template parameters
+    struct test_struct {
+        [[no_unique_address]] ga::tags::euclidean metric_space;
+        [[no_unique_address]] ga::tags::geometric_product product_op;
+        [[no_unique_address]] ga::tags::compile_time eval_strategy;
+    };
+    
+    // Verify the struct has minimal size (empty base optimization)
+    // Note: Even with [[no_unique_address]], the struct needs at least 1 byte
+    static_assert(sizeof(test_struct) >= 1);
+    static_assert(sizeof(test_struct) <= 3); // Should be optimized to minimal size
+    
+    TEST_PASS("Tag types");
+    return true;
+}
+
 bool test_geometric_algebra_basics() {
     // Test that our foundation supports basic GA concepts
     
@@ -253,6 +319,7 @@ int main() {
     all_passed &= test_type_traits();
     all_passed &= test_tolerance();
     all_passed &= test_exceptions();
+    all_passed &= test_tag_types();
     all_passed &= test_geometric_algebra_basics();
     
     std::cout << "\n=====================================\n";
