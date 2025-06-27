@@ -2,11 +2,11 @@
 name = "gatl-rust"
 version = "0.1.0"
 edition = "2021"
-description = "Rust implementation of GATL (Geometric Algebra Template Library)"
+description = "Rust implementation of GATL (Geometric Algebra Template Library) - Modern Algebraic Types"
 authors = ["Leandro A. F. Fernandes <laffernandes@ic.uff.br>", "Durant Schoon <durant.schoon@gmail.com>"]
-license = "GPL-3.0"
+license = "MPL-2.0"
 repository = "https://github.com/durantschoon/gatl"
-keywords = ["geometric-algebra", "clifford-algebra", "mathematics", "physics"]
+keywords = ["geometric-algebra", "clifford-algebra", "mathematics", "physics", "modern-types"]
 categories = ["science", "mathematics"]
 
 [dependencies]
