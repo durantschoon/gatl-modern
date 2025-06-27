@@ -31,12 +31,14 @@ pub mod core;
 pub mod exceptions;
 pub mod constants;
 pub mod types;
+pub mod modern;
 
 // Re-export main types and functions for convenience
 pub use core::*;
 pub use exceptions::*;
 pub use constants::*;
 pub use types::*;
+pub use modern::types::*;
 
 // Legacy function for backward compatibility with existing tests
 pub fn add(left: u64, right: u64) -> u64 {
